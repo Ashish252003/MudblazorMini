@@ -1,0 +1,73 @@
+﻿@page "/Employees"
+@using EmployeeCrudBlazor.Data
+@inject EmployeeService employeeService
+<NavLink class="nav-link" href="AddEmployee">
+	<span class="oi  oi-plus" aria-hidden="true"> Add New Employee</span>
+</NavLink>
+
+
+<h3>EmployeeList</h3>
+
+
+@if(EmObj is null)
+{
+	<p> <em> Loading...........!</em></p>
+} else
+{
+	<table>
+		 <thead>
+			 <tr>
+				 <th>
+					 Emp No.
+
+				 </th>
+				 <th>
+					 Employee Name
+
+				 </th>
+				 <th>
+					 Email Adresss
+				 </th>
+				 <th>
+					Designation
+				 </th>
+				 <th>
+					 Phone Number
+				 </th>
+			 </tr>
+		 </thead>
+		 <tbody>
+			 @foreach(var emp in EmObj)
+			 {
+				  <tr>
+					   <td>
+						   @emp.Id
+					   </td>
+					   <td>
+						   @emp.FullName
+					   </td>
+					   <td>
+						   @emp.Email
+					   </td>
+					   <td>
+						   @emp.Designation
+					   </td>
+					   <td>
+						   @emp.PhoneNumber
+					   </td>
+				  </tr>
+			 }
+		 </tbody>
+	</table>
+}
+
+@code {
+
+	List<Employee> EmObj;
+
+	protected  override async Task  OnInitializedAsync()
+	{
+		EmObj= await Task.Run(() => employeeService.GetAllEmployees());
+	}
+
+}
