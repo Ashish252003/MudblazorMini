@@ -1,0 +1,2 @@
+# MudblazorMini
+Mudblazor mini project
